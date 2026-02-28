@@ -1,0 +1,85 @@
+# Publish to PyPI (and optionally Test PyPI).
+# Trigger: GitHub Release published, or manual workflow_dispatch.
+# Requires: PyPI Trusted Publisher configured for this repo, or PYPI_API_TOKEN secret.
+
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      test_pypi:
+        description: "Upload to Test PyPI"
+        required: false
+        default: false
+        type: boolean
+      prod_pypi:
+        description: "Upload to Production PyPI"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install build dependencies
+        run: python -m pip install --upgrade pip build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check built artifacts
+        run: twine check dist/*
+
+      - name: Store the distribution packages
+      uses: actions/upload-artifact@v5
+      with:
+        name: python-package-distributions
+        path: dist/
+
+  publish-testpypi:
+    name: Publish to Test PyPI
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.test_pypi_only == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+
+      - name: Publish to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  publish-pypi:
+    name: Publish to Prod PyPI
+    needs: build
+    # Trigger if it's a release OR (if it's manual AND aiming for prod)
+    if: |
+      github.event_name == 'release' || 
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.prod_pypi == 'true')   
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

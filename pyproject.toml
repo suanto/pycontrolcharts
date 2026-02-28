@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pycontrolcharts"
+version = "0.1.0"
+description = "pyControlCharts - Statistical Process Control (SPC) charts library for Python with pandas integration"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=1.5.0",
+]
+license = "MIT"
+authors = [
+    {name = "Antti Suanto", email = "os@suanto.com"}
+]
+maintainers = [
+    {name = "Antti Suanto", email = "os@suanto.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Manufacturing",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Typing :: Typed",
+]
+keywords = [
+    "spc",
+    "control-charts",
+    "statistical-process-control",
+    "quality-control",
+    "xmr",
+    "xbar",
+    "p-chart",
+    "c-chart",
+    "six-sigma",
+    "process-control",
+    "statistics",
+]
+
+[project.urls]
+Homepage = "https://github.com/suanto/pycontrolcharts"
+Repository = "https://github.com/suanto/pycontrolcharts"
+Documentation = "https://github.com/suanto/pycontrolcharts#readme"
+"Bug Tracker" = "https://github.com/suanto/pycontrolcharts/issues"
+Changelog = "https://github.com/suanto/pycontrolcharts/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.8.0",
+]
+plotly = [
+    "plotly>=5.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.coverage.run]
+source = ["pycontrolcharts"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
