@@ -49,7 +49,7 @@ jobs:
   publish-testpypi:
     name: Publish to Test PyPI
     needs: build
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.test_pypi_only == 'true'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.test_pypi == 'true'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
