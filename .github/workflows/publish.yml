@@ -54,16 +54,15 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - name: Download dist
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-
-      - name: Publish to Test PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
-          skip-existing: true
+    - name: Download all the dists
+      uses: actions/download-artifact@v6
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish to Test PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        repository-url: https://test.pypi.org/legacy/
 
   publish-pypi:
     name: Publish to Prod PyPI
@@ -76,10 +75,10 @@ jobs:
     permissions:
       id-token: write
     steps:
-      - name: Download dist
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+    - name: Download all the dists
+      uses: actions/download-artifact@v6
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish to ProdPyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
