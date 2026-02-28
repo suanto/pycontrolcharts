@@ -5,8 +5,6 @@
 name: Publish to PyPI
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       test_pypi:
@@ -19,6 +17,8 @@ on:
         required: false
         default: false
         type: boolean
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -41,10 +41,10 @@ jobs:
         run: twine check dist/*
 
       - name: Store the distribution packages
-      uses: actions/upload-artifact@v5
-      with:
-        name: python-package-distributions
-        path: dist/
+        uses: actions/upload-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
 
   publish-testpypi:
     name: Publish to Test PyPI
