@@ -12,7 +12,7 @@ try:
 
     __version__ = version('pycontrolcharts')
 except Exception:
-    __version__ = '0.1.0'
+    __version__ = '0.1.1'
 
 from pycontrolcharts.models import CustomLimits, RunType, RunTestConfig, ChartType
 from pycontrolcharts.core import run_tests_with_custom_limits
