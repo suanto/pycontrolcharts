@@ -12,7 +12,7 @@ from typing import Any
 import pandas as pd
 
 # Subplot layout for XmR with variation chart
-_SUBPLOT_VERTICAL_SPACING = 0.05
+_SUBPLOT_VERTICAL_SPACING = 0.1
 _MAIN_ROW_HEIGHT = 0.7
 _VARIATION_ROW_HEIGHT = 0.3
 
