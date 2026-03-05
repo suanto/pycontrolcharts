@@ -16,6 +16,18 @@ For Plotly-related work, also install the plotly extra:
 pip install -e ".[dev,plotly]"
 ```
 
+## Package version
+
+The project uses [setuptools-scm](https://setuptools-scm.readthedocs.io/): the package version is derived from Git tags at build time (there is no `version` field in `pyproject.toml`). On a tagged commit you get that version (e.g. tag `v0.1.1` → version `0.1.1`). On commits after a tag you get a development version (e.g. `0.1.2.dev3+g1a2b3c4`). Releases are made by creating a GitHub Release with a three-part tag and `v` prefix (e.g. `v0.1.0`); no manual version bump in the repo.
+
+To see which version would be produced for the current Git state, from the repo root run:
+
+```bash
+python -m setuptools_scm
+```
+
+After an editable install, `python -c "import pycontrolcharts; print(pycontrolcharts.__version__)"` shows the version from the last build.
+
 ## Running tests
 
 ```bash

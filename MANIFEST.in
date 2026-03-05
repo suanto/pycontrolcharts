@@ -1,0 +1,7 @@
+# Exclude development and CI files from source distribution.
+# setuptools-scm includes all SCM-tracked files by default.
+global-exclude *.pyc __pycache__
+prune .github
+prune tests
+prune scripts
+prune notebooks
