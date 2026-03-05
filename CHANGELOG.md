@@ -8,7 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- Versioning: Package version is now derived from Git tags via [setuptools-scm](https://setuptools-scm.readthedocs.io/) at build time. 
+- Versioning: Package version is now derived from Git tags via [setuptools-scm](https://setuptools-scm.readthedocs.io/) at build time.
+- Plotting: show x-axis labels only on the bottom (variation) subplot when main and variation are both shown, to prevent long labels overlapping the variation chart.
 
 ## [0.1.1] - 2025-03-01
 
