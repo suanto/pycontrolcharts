@@ -12,7 +12,7 @@ from typing import Any
 import pandas as pd
 
 # Subplot layout for XmR with variation chart
-_SUBPLOT_VERTICAL_SPACING = 0.09
+_SUBPLOT_VERTICAL_SPACING = 0.05
 _MAIN_ROW_HEIGHT = 0.7
 _VARIATION_ROW_HEIGHT = 0.3
 
@@ -796,18 +796,20 @@ def _plot_main_and_variation(
         'yaxis': _yaxis_main,
     }
     if show_variation:
+        # Show x-axis labels on the bottom subplot only so long/vertical labels
+        # do not overlap the variation chart (Option A).
         layout_kw['xaxis'] = {
-            **_AXIS_FRAME,
-            **_X_TICKS_EVERY_VALUE,
-            **_X_RANGE,
-            'showticklabels': True,
-        }
-        layout_kw['xaxis2'] = {
             **_AXIS_FRAME,
             **_X_TICKS_EVERY_VALUE,
             **_X_RANGE,
             'showticklabels': False,
             'ticklen': 0,
+        }
+        layout_kw['xaxis2'] = {
+            **_AXIS_FRAME,
+            **_X_TICKS_EVERY_VALUE,
+            **_X_RANGE,
+            'showticklabels': True,
         }
         layout_kw['yaxis2'] = {**_AXIS_FRAME, 'ticklen': 0}
     if height is not None:
@@ -819,16 +821,6 @@ def _plot_main_and_variation(
     #     'pad': 10,
     # }
     fig.update_layout(**layout_kw)
-    if show_variation and variation_title and len(fig.layout.annotations) >= 2:
-        # Move variation subplot title from above to below the chart
-        ann = fig.layout.annotations[1]
-        ann.update(
-            xref='x2 domain',
-            yref='y2 domain',
-            x=0.5,
-            y=-0.08,
-            yanchor='top',
-        )
     if layout:
         fig.update_layout(**layout)
 
