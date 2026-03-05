@@ -797,7 +797,7 @@ def _plot_main_and_variation(
     }
     if show_variation:
         # Show x-axis labels on the bottom subplot only so long/vertical labels
-        # do not overlap the variation chart (Option A).
+        # do not overlap the variation chart
         layout_kw['xaxis'] = {
             **_AXIS_FRAME,
             **_X_TICKS_EVERY_VALUE,
