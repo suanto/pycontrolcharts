@@ -4,20 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.1.2] - 2026-03-06
 
 ### Changed
 
 - Versioning: Package version is now derived from Git tags via [setuptools-scm](https://setuptools-scm.readthedocs.io/) at build time.
 - Plotting: show x-axis labels only on the bottom (variation) subplot when main and variation are both shown, to prevent long labels overlapping the variation chart.
 
-## [0.1.1] - 2025-03-01
+## [0.1.1] - 2026-03-01
 
 ### Changed
 
 - Plotting: increased vertical spacing between main and variation subplots.
 
-## [0.1.0] - 2025-02-27
+## [0.1.0] - 2026-02-27
 
 ### Added
 
